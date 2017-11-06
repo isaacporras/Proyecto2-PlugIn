@@ -143,8 +143,13 @@ public class TextView extends ViewPart {
 				Nodo_product_concrete actual = Parser.dar_methods().inicio;
 				Nodo_product_concrete nodo_con_metodo;
 				while(actual!= null) {
-					if (actual.getNombre() == Menu_method.getText()) {
+					System.out.println("VERIFIQUE ESTO PLAYOOOOOOOOOOOOOOOO");
+					System.out.println(actual.getNombre());
+					if (actual.getNombre().toString() == Menu_method.getText().toString()) {
 						nodo_con_metodo = actual;
+						System.out.println("-------------VARA SUPER IMPORTANTE ------------");
+						nodo_con_metodo.getDato();
+						System.out.println("--------AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
 					}
 					else {
 						actual = actual.getSiguiente();
@@ -162,7 +167,8 @@ public class TextView extends ViewPart {
 		canvas.addPaintListener(new PaintListener() {
 			@Override
 			public void paintControl(PaintEvent e) {
-				e.gc.drawRectangle(50, 50, 50, 50);
+//				e.gc.drawRectangle(10, 150, 150, 10);
+//				e.gc.drawOval(50,80, 80, 80);
 			}
 		});	
 	}
