@@ -133,6 +133,7 @@ public class TextView extends ViewPart {
 //		
 //		Menu_method.addKeyListener((KeyListener) listener);
 //		
+		
 		Menu_method.addSelectionListener(new SelectionListener() {
 			
 			@Override
@@ -156,7 +157,6 @@ public class TextView extends ViewPart {
 				// TODO Auto-generated method stub
 				//ESTO NO LE PONGA NADA
 			}
-			
 		});	
 		
 		canvas.addPaintListener(new PaintListener() {
@@ -164,10 +164,7 @@ public class TextView extends ViewPart {
 			public void paintControl(PaintEvent e) {
 				e.gc.drawRectangle(50, 50, 50, 50);
 			}
-		});
-		
-
-		
+		});	
 	}
 	
 	
