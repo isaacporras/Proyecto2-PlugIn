@@ -112,33 +112,43 @@ public class TextView extends ViewPart {
 		
 		
 		
-		KeyListener listener =  new KeyListener() {
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-				addMethods();
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		};
-		
-		
-		Menu_method.setItems();
-		
-		Menu_method.addKeyListener((KeyListener) listener);
-		
+//		KeyListener listener =  new KeyListener() {
+//
+//			@Override
+//			public void keyPressed(KeyEvent e) {
+//				// TODO Auto-generated method stub
+//				addMethods();
+//			}
+//
+//			@Override
+//			public void keyReleased(KeyEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//		};
+//		
+//		
+//		Menu_method.setItems();
+//		
+//		Menu_method.addKeyListener((KeyListener) listener);
+//		
 		Menu_method.addSelectionListener(new SelectionListener() {
 			
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				// TODO Auto-generated method stub
 				//ACA ES DONDE USTED TIENE QUE PONER LO QUE VA A HACER CON EL METODO SELECCIONADO
+				Nodo_product_concrete actual = Parser.dar_methods().inicio;
+				Nodo_product_concrete nodo_con_metodo;
+				while(actual!= null) {
+					if (actual.getNombre() == Menu_method.getText()) {
+						nodo_con_metodo = actual;
+					}
+					else {
+						actual = actual.getSiguiente();
+					}
+				}
 			}
 
 			@Override
