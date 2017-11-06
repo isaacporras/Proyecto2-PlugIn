@@ -31,7 +31,6 @@ import javax.inject.Inject;
  * presented in the same way everywhere.
  * <p>
  */
-
 public class Code_View extends ViewPart {
 	static Label codigo_label;
 

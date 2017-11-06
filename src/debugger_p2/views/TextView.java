@@ -1,43 +1,20 @@
 package debugger_p2.views;
 import org.eclipse.swt.events.SelectionListener;
-import java.util.LinkedList;
 import javax.inject.Inject;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
-import org.eclipse.swt.events.DisposeEvent;
-import org.eclipse.swt.events.DisposeListener;
-import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.events.KeyListener;
-import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import Logic.Parser;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Canvas;
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.ui.part.*;
-
-import org.eclipse.jface.viewers.*;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.draw2d.LightweightSystem;
-import org.eclipse.draw2d.geometry.Rectangle;
-import org.eclipse.jface.action.*;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.*;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.SWT;
-import javax.inject.Inject;
-import Listas.Lista;
 import Listas.Nodo_product_concrete;
 
 /**
@@ -59,6 +36,7 @@ import Listas.Nodo_product_concrete;
  */
 
 public class TextView extends ViewPart {
+	Nodo_product_concrete nodo_con_metodo;
 	Canvas canvas;
 	 Nodo_product_concrete actual = Parser.dar_methods().inicio;
 	public static Combo Menu_method;
@@ -105,7 +83,7 @@ public class TextView extends ViewPart {
 		ScrolledComposite container = new ScrolledComposite(parent, SWT.H_SCROLL | SWT.V_SCROLL);
 		container.setLayoutData(Area_diagram);
 		this.canvas = new Canvas(container, SWT.NONE);
-		canvas.setSize(1000, 1000);
+		canvas.setSize(8000, 8000);
 		container.setContent(canvas);
 		
 		
@@ -141,12 +119,13 @@ public class TextView extends ViewPart {
 				// TODO Auto-generated method stub
 				//ACA ES DONDE USTED TIENE QUE PONER LO QUE VA A HACER CON EL METODO SELECCIONADO
 				Nodo_product_concrete actual = Parser.dar_methods().inicio;
-				Nodo_product_concrete nodo_con_metodo;
+				
 				while(actual!= null) {
 					
 					System.out.println(actual.getNombre());
 					
 					if (actual.getNombre().toString().equals(Menu_method.getText().toString())) {
+						System.out.println("el nodo con el metodo es  :" + nodo_con_metodo);
 						nodo_con_metodo = actual;
 						
 						nodo_con_metodo.getDato();
@@ -169,15 +148,116 @@ public class TextView extends ViewPart {
 		canvas.addPaintListener(new PaintListener() {
 			@Override
 			public void paintControl(PaintEvent e) {
-				e.gc.drawRectangle(10, 150, 150, 10);
-				e.gc.drawOval(50,80, 80, 80);
+				while (Menu_method.toString() == "") {
+					
+				}
+				
+				draw(e);
+				
+
+				
 			}
 		});	
 	}
 	
 	
 	
+	public void draw(PaintEvent e) {
+		int x = 100;
+		int y = 50;
+		
+		//System.out.println("llego");
+		
+		Listas.Lista list = new Listas.Lista();
+		
+		//System.out.println("llego +1");
+		
+		Nodo_product_concrete actual = nodo_con_metodo;
+		//System.out.println("el actual es: " + actual);
+		//System.out.println("llego +2");
+		
+
+		
+		//System.out.println("llego +3");
+		
+
+			while (actual != null) {
+				if (actual.tipo == "if") {
+					
+					//System.out.println("llego2");
+		
+					e.gc.drawOval(x, y, 200, 100);
+					e.gc.drawString(actual.statement.toString(), x +100, y +50);
+					
+					e.gc.drawLine(x +100, y +100, x +100, y +150);	//		.
+																	//		.
+					
+					e.gc.drawLine(x +200, y +50 , x +250, y +50 );	//		__.
+					e.gc.drawLine(x +250, y +50 , x +250, y +300);	//		  .
+					e.gc.drawLine(x +250, y +300, x +100, y +300);	// 	 	__.
+					
+					e.gc.drawLine(x +100, y +250, x +100, y +350);	//		.
+																	//		.
+				}
+				
+				if (actual.tipo == "while") {
+					e.gc.drawOval(x, y, 200, 100);
+					e.gc.drawString(actual.statement.toString(), x +100, y +50);
+					
+					e.gc.drawLine(x +100, y +100, x +100, y +150);	//		.
+																	//		.
+					
+					e.gc.drawLine(x +200, y +50 , x +250, y +50 );	//		__.
+					e.gc.drawLine(x +250, y +50 , x +250, y +300);	//		  .
+					e.gc.drawLine(x +250, y +300, x +100, y +300);	// 	 	__.
+					
+					e.gc.drawLine(x   , x +200, x -50, x +200);		//		.__
+					e.gc.drawLine(x-50, x +200, x -50, x +50 );		//		.
+					e.gc.drawLine(x-50, x +50 , x    , x +50 );		//		.__
+					
+					e.gc.drawLine(x +100, y +250, x +100, y +350);	//		.
+																	//		.
+				}
+				
+				if (actual.tipo == "for") {
+					e.gc.drawOval(x, y, 200, 100);
+					e.gc.drawString(actual.statement.toString(), x +100, y +50);
+					
+					e.gc.drawLine(x +100, y +100, x +100, y +150);	//		.
+																	//		.
+					
+					e.gc.drawLine(x +200, y +50 , x +250, y +50 );	//		__.
+					e.gc.drawLine(x +250, y +50 , x +250, y +300);	//		  .
+					e.gc.drawLine(x +250, y +300, x +100, y +300);	//  		__.
+					
+					e.gc.drawLine(x   , x +200, x -50, x +200);		//		.__
+					e.gc.drawLine(x-50, x +200, x -50, x +50 );		//		.
+					e.gc.drawLine(x-50, x +50 , x    , x +50 );		//		.__
+					
+					e.gc.drawLine(x +100, y +250, x +100, y +350);	//		.
+																	//		.
+		
+				}
+				
+				actual.getDato().imprimirAnidados();
+				
+				while (actual != null) {
+					
+					//System.out.println("llego3");
+					
+					e.gc.drawRectangle(x +200, y +100, 200, 100);					//		.__________.
+					e.gc.drawString(actual.statement.toString(), x +200, y +100);		//		.		   .
+																					//		.__________.
+					
+					x+= 400;
+					actual = actual.getSiguiente();
+				}
+				x+= 400;
+			}
+		}
+		
 	
+
 	
 	
 	
@@ -194,4 +274,3 @@ public class TextView extends ViewPart {
 
 	
 }
-

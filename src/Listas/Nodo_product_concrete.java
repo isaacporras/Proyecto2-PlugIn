@@ -7,10 +7,10 @@ package Listas;
  *
  */
 public class Nodo_product_concrete implements Nodo_product_abstract{
-	Object statement;
+	public Object statement;
 	Lista dato;
 	Nodo_product_concrete siguiente;
-	String tipo;
+	public String tipo;
 	/**
 	 * 	define los datos principales del nodo
 	 * @param nom nombre del nodo

@@ -7,7 +7,6 @@ import Logic.Parser;
  * Esta clase agarra es la encargada de enlazar los nodos 
  * utilizando e instanciarlos utilizando una fabrica concreta
  * @author IsaacPorras
- *
  */
 public class Lista {
 
