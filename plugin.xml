@@ -23,7 +23,7 @@
       <view
             category="Debugger_P2"
             class="debugger_p2.views.TextView"
-            icon="icons/sample.png"
+            icon="icons/icon_diagram.png"
             id="debugger_p2.views.TextView"
             inject="true"
             name="Diagram">
@@ -31,7 +31,7 @@
       <view
             category="Debugger_P2"
             class="debugger_p2.views.Code_View"
-            icon="icons/sample.png"
+            icon="icons/icon_code.png"
             id="debugger_p2.views.Code_View"
             inject="true"
             name="Code">
