@@ -29,6 +29,7 @@ import org.eclipse.jdt.core.dom.TypeDeclaration;
  *Descripcion: En esta clase es donde se parsea el codigo
  */
 public class Parser {
+	
 	static String [] metodos;
 	String class_name ="";
 	Lista lista_class = new Lista();

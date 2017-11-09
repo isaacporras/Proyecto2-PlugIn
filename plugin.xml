@@ -84,6 +84,20 @@
             Import a file from the local file system into the workspace.
          </description>
       </wizard>
+      <category
+            id="debugger_p2.importWizards.sampleCategory"
+            name="Sample File Import">
+      </category>
+      <wizard
+            category="debugger_p2.importWizards.sampleCategory"
+            class="debugger_p2.importWizards.ImportWizard"
+            icon="icons/sample.png"
+            id="debugger_p2.importWizards.ImportWizard"
+            name="Import File">
+         <description>
+            Import a file from the local file system into the workspace.
+         </description>
+      </wizard>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
@@ -169,5 +183,14 @@
          </view>
       </perspectiveExtension>
 	</extension>
+      <extension
+            point="org.eclipse.ui.newWizards">
+         <category
+               id="Debugger_P2"
+               name="Sample Wizards">
+         </category>
+
+  
+      </extension>
 
 </plugin>

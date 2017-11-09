@@ -36,6 +36,8 @@ import Listas.Nodo_product_concrete;
  */
 
 public class TextView extends ViewPart {
+	int x = 100;
+	int y = 50;
 	Nodo_product_concrete nodo_con_metodo;
 	Canvas canvas;
 	 Nodo_product_concrete actual = Parser.dar_methods().inicio;
@@ -86,32 +88,6 @@ public class TextView extends ViewPart {
 		canvas.setSize(8000, 8000);
 		container.setContent(canvas);
 		
-		
-		
-		
-		
-//		KeyListener listener =  new KeyListener() {
-//
-//			@Override
-//			public void keyPressed(KeyEvent e) {
-//				// TODO Auto-generated method stub
-//				addMethods();
-//			}
-//
-//			@Override
-//			public void keyReleased(KeyEvent e) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//			
-//		};
-//		
-//		
-//		Menu_method.setItems();
-//		
-//		Menu_method.addKeyListener((KeyListener) listener);
-//		
-		
 		Menu_method.addSelectionListener(new SelectionListener() {
 			
 			@Override
@@ -125,10 +101,11 @@ public class TextView extends ViewPart {
 					System.out.println(actual.getNombre());
 					
 					if (actual.getNombre().toString().equals(Menu_method.getText().toString())) {
-						System.out.println("el nodo con el metodo es  :" + nodo_con_metodo);
-						nodo_con_metodo = actual;
 						
-						nodo_con_metodo.getDato();
+						nodo_con_metodo = actual;
+						System.out.println("-------EL NODO CON METODO ES:" + nodo_con_metodo.getNombre() );
+						System.out.println(nodo_con_metodo.getDato());
+						manage(nodo_con_metodo);
 						
 						break;
 					}
@@ -143,16 +120,82 @@ public class TextView extends ViewPart {
 				// TODO Auto-generated method stub
 				//ESTO NO LE PONGA NADA
 			}
+			
 		});	
-		
+	}
+	public void manage(Nodo_product_concrete nodo_con_metodo) {
 		canvas.addPaintListener(new PaintListener() {
+			
+			Nodo_product_concrete node = nodo_con_metodo.getDato().inicio;
 			@Override
 			public void paintControl(PaintEvent e) {
-				while (Menu_method.toString() == "") {
-					
-				}
 				
-				draw(e);
+				e.gc.drawRectangle(100 +200, 50 +100, 200, 100);					
+				e.gc.drawString(nodo_con_metodo.getNombre().toString(), 100 +200, 50 +100);	
+				while (node != null) {
+					if (node.tipo == "if") {
+						
+						//System.out.println("llego2");
+					
+						e.gc.drawOval(x, y, 200, 100);
+						e.gc.drawString(node.statement.toString(), x +100, y +50);
+								
+						e.gc.drawLine(x +100, y +100, x +100, y +150);	//		.
+																				//		.
+								
+						e.gc.drawLine(x +200, y +50 , x +250, y +50 );	//		__.
+						e.gc.drawLine(x +250, y +50 , x +250, y +300);	//		  .
+						e.gc.drawLine(x +250, y +300, x +100, y +300);	// 	 	__.
+								
+						e.gc.drawLine(x +100, y +250, x +100, y +350);	//		.//		.
+						y = y+ 100;
+						
+						
+					}
+							
+					if (node.tipo == "while") {
+						e.gc.drawOval(x, y, 200, 100);
+						e.gc.drawString(node.statement.toString(), x +100, y +50);
+								
+						e.gc.drawLine(x +100, y +100, x +100, y +150);	//		.
+																				//		.
+								
+						e.gc.drawLine(x +200, y +50 , x +250, y +50 );	//		__.
+						e.gc.drawLine(x +250, y +50 , x +250, y +300);	//		  .
+						e.gc.drawLine(x +250, y +300, x +100, y +300);	// 	 	__.
+								
+						e.gc.drawLine(x   , x +200, x -50, x +200);		//		.__
+						e.gc.drawLine(x-50, x +200, x -50, x +50 );		//		.
+						e.gc.drawLine(x-50, x +50 , x    , x +50 );		//		.__
+								
+						e.gc.drawLine(x +100, y +250, x +100, y +350);	//		.
+						y = y+ 100;											//		.
+						
+					}
+							
+					if (node.tipo == "for") {
+						e.gc.drawOval(x, y, 200, 100);
+						e.gc.drawString(node.statement.toString(), x +100, y +50);
+								
+						e.gc.drawLine(x +100, y +100, x +100, y +150);	//		.
+																				//		.
+								
+						e.gc.drawLine(x +200, y +50 , x +250, y +50 );	//		__.
+						e.gc.drawLine(x +250, y +50 , x +250, y +300);	//		  .
+						e.gc.drawLine(x +250, y +300, x +100, y +300);	//  		__.
+								
+						e.gc.drawLine(x   , x +200, x -50, x +200);		//		.__
+						e.gc.drawLine(x-50, x +200, x -50, x +50 );		//		.
+						e.gc.drawLine(x-50, x +50 , x    , x +50 );		//		.__
+								
+						e.gc.drawLine(x +100, y +250, x +100, y +350);	//		.
+						y = y+ 100;													//		.
+						
+					
+					}
+					
+					node = node.getSiguiente();
+				}
 				
 
 				
@@ -162,103 +205,73 @@ public class TextView extends ViewPart {
 	
 	
 	
-	public void draw(PaintEvent e) {
-		int x = 100;
-		int y = 50;
+	
+	public void draw(PaintEvent e,Nodo_product_concrete nodo ) {
 		
-		//System.out.println("llego");
 		
-		Listas.Lista list = new Listas.Lista();
-		
-		//System.out.println("llego +1");
-		
-		Nodo_product_concrete actual = nodo_con_metodo;
-		//System.out.println("el actual es: " + actual);
-		//System.out.println("llego +2");
-		
-
-		
-		//System.out.println("llego +3");
-		
-
-			while (actual != null) {
-				if (actual.tipo == "if") {
+		if (nodo.tipo == "if") {
 					
-					//System.out.println("llego2");
+			//System.out.println("llego2");
 		
-					e.gc.drawOval(x, y, 200, 100);
-					e.gc.drawString(actual.statement.toString(), x +100, y +50);
+			e.gc.drawOval(x, y, 200, 100);
+			e.gc.drawString(nodo.statement.toString(), x +100, y +50);
 					
-					e.gc.drawLine(x +100, y +100, x +100, y +150);	//		.
+			e.gc.drawLine(x +100, y +100, x +100, y +150);	//		.
 																	//		.
 					
-					e.gc.drawLine(x +200, y +50 , x +250, y +50 );	//		__.
-					e.gc.drawLine(x +250, y +50 , x +250, y +300);	//		  .
-					e.gc.drawLine(x +250, y +300, x +100, y +300);	// 	 	__.
+			e.gc.drawLine(x +200, y +50 , x +250, y +50 );	//		__.
+			e.gc.drawLine(x +250, y +50 , x +250, y +300);	//		  .
+			e.gc.drawLine(x +250, y +300, x +100, y +300);	// 	 	__.
 					
-					e.gc.drawLine(x +100, y +250, x +100, y +350);	//		.
-																	//		.
-				}
-				
-				if (actual.tipo == "while") {
-					e.gc.drawOval(x, y, 200, 100);
-					e.gc.drawString(actual.statement.toString(), x +100, y +50);
-					
-					e.gc.drawLine(x +100, y +100, x +100, y +150);	//		.
-																	//		.
-					
-					e.gc.drawLine(x +200, y +50 , x +250, y +50 );	//		__.
-					e.gc.drawLine(x +250, y +50 , x +250, y +300);	//		  .
-					e.gc.drawLine(x +250, y +300, x +100, y +300);	// 	 	__.
-					
-					e.gc.drawLine(x   , x +200, x -50, x +200);		//		.__
-					e.gc.drawLine(x-50, x +200, x -50, x +50 );		//		.
-					e.gc.drawLine(x-50, x +50 , x    , x +50 );		//		.__
-					
-					e.gc.drawLine(x +100, y +250, x +100, y +350);	//		.
-																	//		.
-				}
-				
-				if (actual.tipo == "for") {
-					e.gc.drawOval(x, y, 200, 100);
-					e.gc.drawString(actual.statement.toString(), x +100, y +50);
-					
-					e.gc.drawLine(x +100, y +100, x +100, y +150);	//		.
-																	//		.
-					
-					e.gc.drawLine(x +200, y +50 , x +250, y +50 );	//		__.
-					e.gc.drawLine(x +250, y +50 , x +250, y +300);	//		  .
-					e.gc.drawLine(x +250, y +300, x +100, y +300);	//  		__.
-					
-					e.gc.drawLine(x   , x +200, x -50, x +200);		//		.__
-					e.gc.drawLine(x-50, x +200, x -50, x +50 );		//		.
-					e.gc.drawLine(x-50, x +50 , x    , x +50 );		//		.__
-					
-					e.gc.drawLine(x +100, y +250, x +100, y +350);	//		.
-																	//		.
-		
-				}
-				
-				actual.getDato().imprimirAnidados();
-				
-				while (actual != null) {
-					
-					//System.out.println("llego3");
-					
-					e.gc.drawRectangle(x +200, y +100, 200, 100);					//		.__________.
-					e.gc.drawString(actual.statement.toString(), x +200, y +100);		//		.		   .
-																					//		.__________.
-					
-					x+= 400;
-					actual = actual.getSiguiente();
-				}
-				x+= 400;
-			}
+			e.gc.drawLine(x +100, y +250, x +100, y +350);	//		.//		.
+			y = y+ 100;
+			
+			
 		}
+				
+		if (nodo.tipo == "while") {
+			e.gc.drawOval(x, y, 200, 100);
+			e.gc.drawString(nodo.statement.toString(), x +100, y +50);
+					
+			e.gc.drawLine(x +100, y +100, x +100, y +150);	//		.
+																	//		.
+					
+			e.gc.drawLine(x +200, y +50 , x +250, y +50 );	//		__.
+			e.gc.drawLine(x +250, y +50 , x +250, y +300);	//		  .
+			e.gc.drawLine(x +250, y +300, x +100, y +300);	// 	 	__.
+					
+			e.gc.drawLine(x   , x +200, x -50, x +200);		//		.__
+			e.gc.drawLine(x-50, x +200, x -50, x +50 );		//		.
+			e.gc.drawLine(x-50, x +50 , x    , x +50 );		//		.__
+					
+			e.gc.drawLine(x +100, y +250, x +100, y +350);	//		.
+			y = y+ 100;											//		.
+			
+		}
+				
+		if (nodo.tipo == "for") {
+			e.gc.drawOval(x, y, 200, 100);
+			e.gc.drawString(nodo.statement.toString(), x +100, y +50);
+					
+			e.gc.drawLine(x +100, y +100, x +100, y +150);	//		.
+																	//		.
+					
+			e.gc.drawLine(x +200, y +50 , x +250, y +50 );	//		__.
+			e.gc.drawLine(x +250, y +50 , x +250, y +300);	//		  .
+			e.gc.drawLine(x +250, y +300, x +100, y +300);	//  		__.
+					
+			e.gc.drawLine(x   , x +200, x -50, x +200);		//		.__
+			e.gc.drawLine(x-50, x +200, x -50, x +50 );		//		.
+			e.gc.drawLine(x-50, x +50 , x    , x +50 );		//		.__
+					
+			e.gc.drawLine(x +100, y +250, x +100, y +350);	//		.
+			y = y+ 100;													//		.
+			
 		
-	
+		}
+				
 
-	
+}
 	
 	
 	public static Combo getMethodSelector() {
