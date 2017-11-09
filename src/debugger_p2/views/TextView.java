@@ -96,7 +96,7 @@ public class TextView extends ViewPart {
 				//ACA ES DONDE USTED TIENE QUE PONER LO QUE VA A HACER CON EL METODO SELECCIONADO
 				Nodo_product_concrete actual = Parser.dar_methods().inicio;
 				
-				while(actual!= null) {
+				while( actual!= null) {
 					
 					System.out.println(actual.getNombre());
 					
@@ -133,71 +133,14 @@ public class TextView extends ViewPart {
 				e.gc.drawRectangle(100 +200, 50 +100, 200, 100);					
 				e.gc.drawString(nodo_con_metodo.getNombre().toString(), 100 +200, 50 +100);	
 				while (node != null) {
-					if (node.tipo == "if") {
-						
-						//System.out.println("llego2");
-					
-						e.gc.drawOval(x, y, 200, 100);
-						e.gc.drawString(node.statement.toString(), x +100, y +50);
-								
-						e.gc.drawLine(x +100, y +100, x +100, y +150);	//		.
-																				//		.
-								
-						e.gc.drawLine(x +200, y +50 , x +250, y +50 );	//		__.
-						e.gc.drawLine(x +250, y +50 , x +250, y +300);	//		  .
-						e.gc.drawLine(x +250, y +300, x +100, y +300);	// 	 	__.
-								
-						e.gc.drawLine(x +100, y +250, x +100, y +350);	//		.//		.
-						y = y+ 100;
-						
-						
-					}
-							
-					if (node.tipo == "while") {
-						e.gc.drawOval(x, y, 200, 100);
-						e.gc.drawString(node.statement.toString(), x +100, y +50);
-								
-						e.gc.drawLine(x +100, y +100, x +100, y +150);	//		.
-																				//		.
-								
-						e.gc.drawLine(x +200, y +50 , x +250, y +50 );	//		__.
-						e.gc.drawLine(x +250, y +50 , x +250, y +300);	//		  .
-						e.gc.drawLine(x +250, y +300, x +100, y +300);	// 	 	__.
-								
-						e.gc.drawLine(x   , x +200, x -50, x +200);		//		.__
-						e.gc.drawLine(x-50, x +200, x -50, x +50 );		//		.
-						e.gc.drawLine(x-50, x +50 , x    , x +50 );		//		.__
-								
-						e.gc.drawLine(x +100, y +250, x +100, y +350);	//		.
-						y = y+ 100;											//		.
-						
-					}
-							
-					if (node.tipo == "for") {
-						e.gc.drawOval(x, y, 200, 100);
-						e.gc.drawString(node.statement.toString(), x +100, y +50);
-								
-						e.gc.drawLine(x +100, y +100, x +100, y +150);	//		.
-																				//		.
-								
-						e.gc.drawLine(x +200, y +50 , x +250, y +50 );	//		__.
-						e.gc.drawLine(x +250, y +50 , x +250, y +300);	//		  .
-						e.gc.drawLine(x +250, y +300, x +100, y +300);	//  		__.
-								
-						e.gc.drawLine(x   , x +200, x -50, x +200);		//		.__
-						e.gc.drawLine(x-50, x +200, x -50, x +50 );		//		.
-						e.gc.drawLine(x-50, x +50 , x    , x +50 );		//		.__
-								
-						e.gc.drawLine(x +100, y +250, x +100, y +350);	//		.
-						y = y+ 100;													//		.
-						
-					
-					}
-					
+					draw(e, node);
 					node = node.getSiguiente();
+					break;
 				}
 				
+				
 
+				
 				
 			}
 		});	
@@ -211,7 +154,7 @@ public class TextView extends ViewPart {
 		
 		if (nodo.tipo == "if") {
 					
-			//System.out.println("llego2");
+			System.out.println("SE DIBUJO IF");
 		
 			e.gc.drawOval(x, y, 200, 100);
 			e.gc.drawString(nodo.statement.toString(), x +100, y +50);
@@ -227,9 +170,11 @@ public class TextView extends ViewPart {
 			y = y+ 100;
 			
 			
+			
 		}
 				
 		if (nodo.tipo == "while") {
+			System.out.println("SE DIBUJO WHILE");
 			e.gc.drawOval(x, y, 200, 100);
 			e.gc.drawString(nodo.statement.toString(), x +100, y +50);
 					
@@ -245,11 +190,15 @@ public class TextView extends ViewPart {
 			e.gc.drawLine(x-50, x +50 , x    , x +50 );		//		.__
 					
 			e.gc.drawLine(x +100, y +250, x +100, y +350);	//		.
-			y = y+ 100;											//		.
+			y = y + 100;										//		.
+			
+			
 			
 		}
 				
 		if (nodo.tipo == "for") {
+			
+			System.out.println("SE DIBUJO FOR");
 			e.gc.drawOval(x, y, 200, 100);
 			e.gc.drawString(nodo.statement.toString(), x +100, y +50);
 					
